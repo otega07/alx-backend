@@ -48,7 +48,7 @@ def get_locale() -> str:
     """Retrieves the locale for a web page.
     """
     if g.user:
-        user_locale = g.user.get('locale')
+        user_locale = g.user.get('locale', '')
     if user_locale in app.config["LANGUAGES"]:
         return user_locale
     else:
