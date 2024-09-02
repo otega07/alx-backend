@@ -19,6 +19,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.url_map.strict_slashes = False
 babel = Babel(app)
+
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -57,8 +58,8 @@ def get_locale() -> str:
     if locale in app.config["LANGUAGES"]:
         return locale
     user_details = getattr(g, 'user', None)
-    if user_details and user_details['locale'] in app.config["LANGUAGES"]:
-        return user_details['locale']
+    if user_details and user_details.get('locale') in app.config["LANGUAGES"]:
+        return user_details.get('locale')
     header_locale = request.headers.get('locale', '')
     if header_locale in app.config["LANGUAGES"]:
         return header_locale
