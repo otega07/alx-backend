@@ -47,15 +47,9 @@ def before_request() -> None:
 def get_locale() -> str:
     """Retrieves the locale for a web page.
     """
-    if g.user:
-        user_locale = g.user.get('locale', '')
-        if user_locale in app.config["LANGUAGES"]:
-            return user_locale
-    else:
-        user_locale = request.args.get('locale')
-        if user_locale and user_locale in app.config['LANGUAGES']
-            return user_locale
-
+    locale = g.user.get('locale', '')
+    if locale in app.config["LANGUAGES"]:
+            return locale
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
