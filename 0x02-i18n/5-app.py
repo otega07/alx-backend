@@ -49,10 +49,12 @@ def get_locale() -> str:
     """
     if g.user:
         locale = g.user.get('locale', '')
-    if locale in app.config["LANGUAGES"]:
-        return locale
+        if locale in app.config["LANGUAGES"]:
+            return locale
     else:
-        return app.config['BABEL_DEFAULT_LOCALE']
+        locale = request.args.get('locale')
+        if locale and locale in app.config['LANGUAGES']
+            return locale
 
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
