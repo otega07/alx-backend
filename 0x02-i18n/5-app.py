@@ -27,7 +27,7 @@ users = {
 
 
 def get_user() -> Union[Dict, None]:
-    """Retrieves a user based on a user id.
+    """Retrieves a user based on a user id from the 'login_as'.
     """
     login_id = request.args.get('login_as')
     if login_id:
@@ -49,7 +49,7 @@ def get_locale() -> str:
     """
     locale = request.args.get('locale', '')
     if locale in app.config["LANGUAGES"]:
-            return locale
+        return locale
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
